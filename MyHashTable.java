@@ -13,19 +13,20 @@ class HashEntry
     {
         this.typ = (text.length() == 1);
         this.text = text;
+        byte x = (byte) text.charAt(0);
 
         this.ascode = new byte[2];
         this.ascode[0] = 0;
-        this.ascode[1] = (int) text.charAt(0);
+        this.ascode[1] = x;
     }
 
     //constructor for newly added words or if code generated elsewhere
 
-    HashEntry(String text, int ascode)
+    HashEntry(String text, byte[] acode)
     {
         this.typ = (text.length() == 1);
         this.text = text;
-        this.ascode = ascode;
+        this.ascode = acode;
     }
 
 
@@ -33,7 +34,20 @@ class HashEntry
 
 public class MyHashTable
 {
-    
+    HashEntry[] table;
+
+    //constructor specific to our dictionary, initialises first 128 entries
+    MyHashTable()
+    {   
+        table = new HashEntry[256];
+        for(int i = 0; i<128;i++)
+        {
+            String temptext = Character.toString((char)i);
+            HashEntry temp = new HashEntry(temptext);
+            this.table[i] = temp;
+        }
+    }
+
     public static void main(String[] args) 
     {
         try
