@@ -35,7 +35,10 @@ class HashEntry
 public class MyHashTable
 {
     HashEntry[] table;
-
+    int lab;//lowest available space in the table
+    byte labbyte;//lowest available byte, will be incremented at each step
+    // byte counter;//the counter which will be added
+    
     //constructor specific to our dictionary, initialises first 128 entries
     MyHashTable()
     {   
@@ -46,8 +49,31 @@ public class MyHashTable
             HashEntry temp = new HashEntry(temptext);
             this.table[i] = temp;
         }
+        this.lab = 128;
+        // this.counter = 0;
+        this.labbyte = -128;
+
+        // this.labbyte = labbyte + (byte) (lab - 128);
     }
 
+    public boolean contains(String str)
+    {
+        boolean ans = false;
+        for(int i = 0;i<this.lab;i++)
+        {
+            HashEntry temp = table[i];
+            String tempstring = temp.text;
+            if (tempstring.equals(str))
+            {
+                ans = true;
+                break;
+            }
+        }
+        return ans;
+    }
+
+
+    /*
     public static void main(String[] args) 
     {
         try
@@ -78,6 +104,7 @@ public class MyHashTable
         }
         // System.out.println(c);
     }
+    */
     
     int getHashIndex(String s)
     {
