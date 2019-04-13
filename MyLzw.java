@@ -22,6 +22,7 @@ public class MyLzw {
             mydictionary.put("" + (char)i,i);
         }
         String w = "";
+        int size = 256;
         for (char c: uncomp.toCharArray())
         {
             String wc = w+c;
@@ -32,12 +33,16 @@ public class MyLzw {
 //                String s = "" + mydictionary.get(w);
 //                Byte b = new Byte(s);
                 ans.add(new Byte("" + mydictionary.get(w)));
-
+                mydictionary.put(wc,size++);
+                w = "" + c;
             }
         }
 
+        if (!w.isBlank())
+        {
+            ans.add(new Byte("" + mydictionary.get(w)));
+        }
         return ans;
-
     }
 
 }
