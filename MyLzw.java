@@ -6,12 +6,12 @@ import java.util.Map;
 
 public class MyLzw {
 
-    public static List<Byte> compress(String uncomp) {
+    public static List<Short> compress(String uncomp) {
 
 
         Map<String, Integer> mydictionary = new HashMap<String, Integer>();
         //This will work as the dictionary
-        List<Byte> ans = new ArrayList<Byte>();
+        List<Short> ans = new ArrayList<Short>();
         //this will store my answer bytes
 
         //initialising the dictionary
@@ -37,7 +37,7 @@ public class MyLzw {
 //                Byte b = new Byte(s);
 
                 //if P+C not in the dictionary, add it to the dictionary and then output the code for P, then make P as C
-                ans.add(new Byte("" + mydictionary.get(w)));
+                ans.add(new Short("" + mydictionary.get(w)));
                 mydictionary.put(wc, size++);
                 w = "" + c;
             }
@@ -45,12 +45,12 @@ public class MyLzw {
 
         //if w has something, add it's code to answer
         if (!w.isBlank()) {
-            ans.add(new Byte("" + mydictionary.get(w)));
+            ans.add(new Short("" + mydictionary.get(w)));
         }
         return ans;
     }
 
-    public static String decompress(List<Byte> compressed) {
+    public static String decompress(List<Short> compressed) {
         int size = 256;
         Map<Integer, String> mydictionary = new HashMap<Integer, String>();
 
@@ -60,7 +60,7 @@ public class MyLzw {
 //        String ans = "";
         String w = "" + (char) compressed.remove(0).intValue();
         StringBuffer ans = new StringBuffer(w);
-        for (Byte k : compressed) {
+        for (Short k : compressed) {
             int ki = k.intValue();
             String newentry = "";
             if (mydictionary.containsKey(ki)) {
@@ -84,23 +84,33 @@ public class MyLzw {
 
     }
 
-    public static List<Integer> byteToInteger (List<Byte> byteList)
+    public static List<Integer> shortToInteger (List<Short> shortList)
     {
         List<Integer> ans = new ArrayList<Integer>();
-        while (!byteList.isEmpty())
+
+        for(Short k : shortList)
         {
-            ans.add(byteList.remove(0).intValue());
+            ans.add(k.intValue());
         }
+//        while (!shortList.isEmpty())
+//        {
+//            ans.add(shortList.remove(0).intValue());
+//        }
         return ans;
     }
 
     public static String printList(List<Integer> listInt)
     {
         StringBuffer an = new StringBuffer("");
-        while(!listInt.isEmpty())
+
+        for (Integer k : listInt)
         {
-            an.append(listInt.remove(0));
+            an.append(k);
         }
+//        while(!listInt.isEmpty())
+//        {
+//            an.append(listInt.remove(0));
+//        }
 
         return an.toString();
     }
@@ -113,10 +123,10 @@ public class MyLzw {
 
         System.out.println();
 
-        List<Byte> a = compress("BABAABAAA");
+        List<Short> a = compress("BABAABAAA");
 //        List<Integer> = (byteToInteger(a));
 
-        String compressed = printList(byteToInteger(a));
+        String compressed = printList(shortToInteger(a));
 
         System.out.println(compressed);
 
