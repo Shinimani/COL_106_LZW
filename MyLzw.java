@@ -84,6 +84,49 @@ public class MyLzw {
 
     }
 
+    public static List<Integer> byteToInteger (List<Byte> byteList)
+    {
+        List<Integer> ans = new ArrayList<Integer>();
+        while (!byteList.isEmpty())
+        {
+            ans.add(byteList.remove(0).intValue());
+        }
+        return ans;
+    }
+
+    public static String printList(List<Integer> listInt)
+    {
+        StringBuffer an = new StringBuffer("");
+        while(!listInt.isEmpty())
+        {
+            an.append(listInt.remove(0));
+        }
+
+        return an.toString();
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println(" It begins here");
+
+        System.out.println("The string is BABAABAAA");
+
+        System.out.println();
+
+        List<Byte> a = compress("BABAABAAA");
+//        List<Integer> = (byteToInteger(a));
+
+        String compressed = printList(byteToInteger(a));
+
+        System.out.println(compressed);
+
+        System.out.println();
+        System.out.println();
+
+        System.out.println(decompress(a));
+
+    }
+
 
 
 
