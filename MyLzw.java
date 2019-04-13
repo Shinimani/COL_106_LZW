@@ -1,8 +1,5 @@
 import javax.naming.SizeLimitExceededException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MyLzw {
 
@@ -120,11 +117,16 @@ public class MyLzw {
 
         System.out.println(" It begins here");
 
-        System.out.println("The string is BABAABAAA");
+        Scanner s = new Scanner(System.in);
+        System.out.println("Please enter the string to be compressed: ");
+        System.out.println();
+        String inp = s.next();
+
+        System.out.println("You entered: " + inp);
 
         System.out.println();
 
-        List<Short> a = compress("BABAABAAA");
+        List<Short> a = compress(inp);
 //        List<Integer> = (byteToInteger(a));
 
         String compressed = printList(shortToInteger(a));
