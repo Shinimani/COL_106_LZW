@@ -106,6 +106,7 @@ public class MyLzw {
         for (Integer k : listInt)
         {
             an.append(k);
+            an.append(" ");
         }
 //        while(!listInt.isEmpty())
 //        {
