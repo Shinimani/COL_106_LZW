@@ -10,26 +10,40 @@ public class MyLzw {
 
 
         Map<String, Integer> mydictionary = new HashMap<String, Integer>();
+        //This will work as the dictionary
         List<Byte> ans = new ArrayList<Byte>();
+        //this will store my answer bytes
 
+        //initialising the dictionary
         for (int i = 0; i < 256; i++) {
             mydictionary.put("" + (char) i, i);
         }
+
+        //working string
         String w = "";
+
         int size = 256;
+
+        //for loop in the Input string
         for (char c : uncomp.toCharArray()) {
+
+            //P + C
             String wc = w + c;
             if (mydictionary.containsKey(wc))
                 w = wc;
+            //if P+C  already in the dictionary, make P = P+C
             else {
 //                String s = "" + mydictionary.get(w);
 //                Byte b = new Byte(s);
+
+                //if P+C not in the dictionary, add it to the dictionary and then output the code for P, then make P as C
                 ans.add(new Byte("" + mydictionary.get(w)));
                 mydictionary.put(wc, size++);
                 w = "" + c;
             }
         }
 
+        //if w has something, add it's code to answer
         if (!w.isBlank()) {
             ans.add(new Byte("" + mydictionary.get(w)));
         }
